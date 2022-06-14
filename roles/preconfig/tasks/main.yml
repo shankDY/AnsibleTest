@@ -13,6 +13,7 @@
           - curl
           - gnupg
           - lsb-release
+          - python3-pip
         update-cache: true
         cache_valid_time: 86400
     - name: add docker key
@@ -53,6 +54,11 @@
         dest: /usr/local/bin/docker-compose
         mode: 0755
   become: true
+- name: configuration additional packages of python 
+  block:
+  - name: installing packages of pip
+    pip:
+      name: docker
 - name: Finish setup
   block:
     - name: Add user
