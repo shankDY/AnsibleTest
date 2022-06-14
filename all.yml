@@ -2,18 +2,23 @@
 - name: Deploy server
   hosts: deploy
   roles:
-    - preconfig
+    - role: preconfig
+      tags: preconfig
+    - role: deploy
+      test: 0
+      tags: deploy
     # - deploy
     # - swarminit
 
 - name: Manager
   hosts: managers
   roles:
-    - preconfig
+    - role: preconfig
+      tags: preconfig
     # - swarm_join
 
 - name: Worker
   hosts: workers
   roles:
-    - preconfig
-    # - swarm_join
+    - role: preconfig
+      tags: preconfig

@@ -1,3 +1,5 @@
 ---
-- name: Demo
-  command: echo "Demo"
+- name: Deploy
+  command: "echo {{ test }} "
+  register: res
+  changed_when: "'0' not in res.stdout"

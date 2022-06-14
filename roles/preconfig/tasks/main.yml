@@ -6,6 +6,7 @@
       ansible.builtin.apt_repository:
         repo: "deb http://archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }} universe"
         state: present
+      tags: universe
     - name: Add Additional packages
       ansible.builtin.apt:
         name:
