@@ -1,10 +1,4 @@
 ---
-- name: Циклы
-  include_tasks: inner.yml
-  loop: 
-    - name: ALex
-    - name: ALLA
-    - name: ALNTON
-    - name: ABY
-  loop_control:
-    loop_var: outer_item
+- name: Deploy
+  debug:
+    msg: "{{ lookup('file', '../meta/mains.yml', errors='warn') }}"
