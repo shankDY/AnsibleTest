@@ -1,5 +1,10 @@
 ---
-- name: Deploy
-  command: "echo {{ test }} "
-  register: res
-  changed_when: "'0' not in res.stdout"
+- name: Циклы
+  include_tasks: inner.yml
+  loop: 
+    - name: ALex
+    - name: ALLA
+    - name: ALNTON
+    - name: ABY
+  loop_control:
+    loop_var: outer_item
