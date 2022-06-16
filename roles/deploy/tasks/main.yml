@@ -1,3 +1,11 @@
 ---
-- name: Demo
-  command: echo "Demo"
+- name: Create Network
+  community.docker.docker_network:
+    name: app_network
+    driver: overlay
+
+- name: upload services
+  include: "../services/{{ item }}/service.yml"
+  Vars:
+    - name: "{{ item }}"
+  loop: "{{ services }}"

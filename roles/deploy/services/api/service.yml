@@ -1,0 +1,26 @@
+- name: "[{{ name }}] Create secret" 
+  docker_secret:
+    name: "{{ name }}.env"
+    data: "{{ lookup('file', '.env') | b64encode }}"
+    labels: # We added label, so that we can understand that the secret has changed
+      secret: "{{ lookup('file', '.env') | hash('sha1') }}"
+    data_is_b64: true
+    state: present
+
+- name: "[{{ name }}] Upload service"
+  docker_swarm_service:
+    name: "{{ name }}"
+    image: localhost:5000/api:latest
+    state: present
+    publish:
+      - mode: ingerss
+        protocol: tcp
+        published_port: 3002 #port in host
+        target_port: 3000 #port in container
+    secrets: 
+      - secret_name: "{{ name }}.env"
+        filename: "/opt/app/.env" # file in container
+
+
+ 
+
