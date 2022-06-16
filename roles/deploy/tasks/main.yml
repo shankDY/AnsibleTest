@@ -1,10 +1,10 @@
 ---
 - name: Create Network
   community.docker.docker_network:
-    name: app_network
+    name: "{{ networkName }}"
     driver: overlay
 
-- name: upload services
+- name: Deploy services
   include: "../services/{{ item }}/service.yml"
   Vars:
     - name: "{{ item }}"
