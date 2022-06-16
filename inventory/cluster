@@ -1,6 +1,11 @@
-[cluster]
+; сервер, где исполняем наш Playbooks
+[deploy]
 server1 ansible_host=192.168.1.3 ansible_user=vagrant ansible_port=2223
+
+[managers]
 server2 ansible_host=192.168.1.3 ansible_user=vagrant ansible_port=2224
 server3 ansible_host=192.168.1.3 ansible_user=vagrant ansible_port=2225
+
+[workers]
 server4 ansible_host=192.168.1.3 ansible_user=vagrant ansible_port=2226
 server5 ansible_host=192.168.1.3 ansible_user=vagrant ansible_port=2227
