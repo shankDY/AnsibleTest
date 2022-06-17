@@ -1,9 +1,5 @@
 ---
 
-- name: "[{{ name }}] Configuration of secret"
-  include_tasks: "../secret.yml"
-
-
 - name: "[{{ name }}] Upload service" 
   block:
     - name: "[{{ name }}] Deploy service"
@@ -16,12 +12,8 @@
         publish:
           - mode: ingress
             protocol: tcp
-            published_port: 3002 #port in host
-            target_port: 3000 #port in container
-        secrets: 
-          - secret_name: "{{ name }}.env"
-            filename: "/opt/app/.env" # file in container
-
+            published_port: 3001 #port in host
+            target_port: 80 #port in container
   tags: "{{ name }}"
 
 

@@ -1,11 +1,12 @@
 ---
 - name: Create Network
   community.docker.docker_network:
-    name: "{{ networkName }}"
+    name: "{{ network_name }}"
     driver: overlay
 
 - name: Deploy services
-  include: "../services/{{ item }}/service.yml"
-  Vars:
-    - name: "{{ item }}"
+  include_tasks: "../services/{{ item.name }}/service.yml"
+  vars:
+    - name: "{{ item.name }}"
+    - version: "{{ item.version }}"
   loop: "{{ services }}"

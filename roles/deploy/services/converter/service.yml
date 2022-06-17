@@ -13,11 +13,6 @@
         state: present
         networks:
           - name: "{{ network_name }}"
-        publish:
-          - mode: ingress
-            protocol: tcp
-            published_port: 3002 #port in host
-            target_port: 3000 #port in container
         secrets: 
           - secret_name: "{{ name }}.env"
             filename: "/opt/app/.env" # file in container
