@@ -1,0 +1,15 @@
+- name: "[{{ name }}] Configuration of config"
+  block:
+    - name: "[{{ name }}] Create config" 
+      include_tasks: "config-create.yml"
+  tags: "{{ name }}"
+  # We grab error.
+  rescue: 
+  # You killing the config. You trying to change the config
+    - name: "[{{ name }}] Dell config"
+      community.docker.docker_swarm_service:
+        name: "{{ name }}"
+        state: absent
+        
+    - name: "[{{ name }}] Create config" 
+      include_tasks: "config-create.yml"

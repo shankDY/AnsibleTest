@@ -2,13 +2,17 @@
   ansible.builtin.git:
     repo: "https://github.com/AlariCode/docker-demo.git"
     dest: "{{ git_folder }}"
-    version: "block-7"
+    version: "block-14"
   
 - name: Build image and push local repo
-  docker_image:
+  community.docker.docker_image:
     name: "{{ registry_name }}{{ item.name }}"
     tag: "{{ item.version }}"
     push: true
+    # The image is being recreated even if there are no changes
+    force_source: true
+    #replaicing the tag, if it exist
+    force_tag: true
     build:
       path: "{{ git_folder }}"
       dockerfile: "{{ git_folder }}/apps/{{ item.name }}/Dockerfile"

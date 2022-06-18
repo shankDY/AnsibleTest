@@ -11,6 +11,8 @@
         name: "{{ name }}"
         image: "{{registry_name}}{{ name }}:{{ version }}"
         state: present
+        # recreate the service. regardless of changes
+        force_update: true
         networks:
           - name: "{{ network_name }}"
         publish:
