@@ -1,0 +1,28 @@
+---
+
+- name: Swarm init
+  community.docker.docker_swarm:
+    state: present
+    advertise_addr: "{{ advertise_addr }}"
+  register: token
+
+
+- name: Check directory
+  local_action: 
+    module: file
+    path: ./tokens
+    state: directory
+
+
+- name: We save manager's token 
+  local_action: 
+    module: copy
+    dest: ./tokens/token-manager
+    content: "{{ token.swarm_facts.JoinTokens.Manager }}"
+
+
+- name: We save worker's token 
+  local_action: 
+    module: copy
+    dest: ./tokens/token-worker
+    content: "{{ token.swarm_facts.JoinTokens.Worker }}"

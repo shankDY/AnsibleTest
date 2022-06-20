@@ -1,6 +1,6 @@
 galaxy_info:
-  role_name: preconfig
-  description: Настройка серверов для настройки Docker
+  role_name: swarm_init
+  description: Инициализация класстера swarm
   author: Alex
   license: MIT
   min_ansible_version: '2.9'
