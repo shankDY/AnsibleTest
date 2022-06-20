@@ -1,10 +1,12 @@
 ---
-
-- name: Swarm join
-  vars:
-    token: "{{ lookup('file', '../../tokens/token-{{ type }}') }}"
+- name: Join
   community.docker.docker_swarm:
     state: join
     # This addres to connect on swarm
     remote_addrs: "{{ advertise_addr }}"
-    join_token: "{{ token }}"
+    join_token: >
+      {{
+        hostvars['server1']['ansible_facts']['token_worker']
+        if type == 'worker' else 
+        hostvars['server1']['ansible_facts']['token_manager']
+      }}

@@ -1,0 +1,20 @@
+---
+# You change status to drain mode 
+- name: Change status of node to drain mode 
+  community.docker.docker_node:
+    hostname: "{{ node_name }}"
+    availability: drain
+
+- name: We wait to node shutdown
+  community.docker.docker_host_info:
+    containers: true
+  register: result
+  retries: 30
+  delay: 2
+  until: result.host_info.ContainersRunning == 0
+  delegate_to: "{{ node_name }}"
+
+- name: Leave swarm for a node
+  community.docker.docker_swarm:
+    state: absent
+    delegate_to: "{{ node_name }}"

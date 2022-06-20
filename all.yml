@@ -10,6 +10,11 @@
       tags: deploy
     - role: swarm_init
       tags: swarm_init
+    - role: swarm_leave
+      vars_promt:
+        - name: "node_name"
+          prompt: "Which node do you delete?"
+      tags: swarm_leave
 
 - name: Manager
   hosts: managers
