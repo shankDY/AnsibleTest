@@ -14,7 +14,7 @@
   until: result.host_info.ContainersRunning == 0
   delegate_to: "{{ node_name }}"
 
-- name: Leave swarm for a node
-  community.docker.docker_swarm:
-    state: absent
-    delegate_to: "{{ node_name }}"
+
+
+- name: Remove node from swarm
+  command: "docker node rm {{ node_name }} --force"
